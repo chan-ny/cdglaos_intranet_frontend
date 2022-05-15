@@ -10,22 +10,27 @@ const routes = [
     name: "LoginPage",
     component: () => import("../pages/loginPage.vue"),
     meta: {
-      allowAccess: false
-    }
+      allowAccess: false,
+    },
   },
   {
     path: "/formatpwd",
     name: "formatpwdPage",
     component: () => import("../pages/formatpwdPage.vue"),
     meta: {
-      allowAccess: false
-    }
+      allowAccess: false,
+    },
   },
   {
     path: "/",
     name: "HomeView",
-    component: () => import('../views/HomeView.vue')
-  }
+    component: () => import("../views/HomeView.vue"),
+  },
+  {
+    path: "/account",
+    name: "Account",
+    component: () => import("../pages/Acoount/index.vue"),
+  },
 ];
 
 const router = new VueRouter({

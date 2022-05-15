@@ -19,11 +19,33 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import i18n from "./i18n";
 export default {
   name: "App",
-
-  data: () => ({
-    //
-  }),
+  computed: {
+    ...mapState(["token", "isUserLogin", "language"]),
+  },
+  mounted() {
+    if (this.isUserLogin == false) {
+      this.$router.push({
+        name: "LoginPage",
+      });
+    } else {
+      i18n.locale = this.language;
+    }
+  },
+  watch: {
+    isUserLogin() {
+      if (this.isUserLogin == false) {
+        this.$router.push({
+          name: "LoginPage",
+        });
+      }
+    },
+    language() {
+      i18n.locale = this.language;
+    },
+  },
 };
 </script>

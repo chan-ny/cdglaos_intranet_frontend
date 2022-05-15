@@ -1,0 +1,117 @@
+<template>
+  <div>
+    <v-card class="ma-2" elevation="4">
+      <div class="pa-4 font20b">{{ $t("title.titleCompany") }}</div>
+      <div class="text-right pr-4 mt-n12">
+        <btnAdd :title="this.$t('btn.add')" :color="'success'" />
+      </div>
+      <div class="font16r pl-4">
+        <strong class="blue--text">{{ nCount }}</strong> {{ $t("text.list") }}
+      </div>
+      <v-data-table
+        :headers="HeaderColumn"
+        :items="mItem"
+        :loading="load"
+        class="elevation-4 mt-4 mx-2 font"
+        :footer-props="{ 'items-per-page-options': [20] }"
+        :items-per-page="20"
+      >
+        <template v-slot:[`item.cpn_content`]="{ item }">
+          <a @click="mShowText = !mShowText"
+            ><div v-if="mShowText">
+              {{ item.cpn_content | truncate(60, ".....") }}
+            </div>
+            <div v-else>
+              {{ item.cpn_content }}
+            </div></a
+          >
+        </template>
+        <template v-slot:[`item.cpn_fromDate`]="{ item }">
+          <span>{{
+            new Date(item.cpn_fromDate).toISOString().slice(0, 10)
+          }}</span>
+        </template>
+        <template v-slot:[`item.cpn_endDate`]="{ item }">
+          <span>{{
+            new Date(item.cpn_endDate).toISOString().slice(0, 10)
+          }}</span>
+        </template>
+        <template v-slot:[`item.createdAt`]="{ item }">
+          <span>{{ new Date(item.createdAt).toISOString().slice(0, 10) }}</span>
+        </template>
+        <template v-slot:[`item.updatedAt`]="{ item }">
+          <span>{{ new Date(item.updatedAt).toISOString().slice(0, 10) }}</span>
+        </template>
+      </v-data-table>
+
+      <pagination class="ma-2" :mCounts="nCount" @onPage="onPages" />
+    </v-card>
+  </div>
+</template>
+<script>
+import AccountService from "../../service/AccountService";
+export default {
+  data() {
+    return {
+      mItem: [],
+      nPage: 0,
+      nCount: 0,
+      load: false,
+      mShowText: true,
+    };
+  },
+  created() {
+    this.initail();
+  },
+  methods: {
+    async initail() {
+      this.load = true;
+      await AccountService.display({
+        params: {
+          page: this.nPage,
+          size: 20,
+        },
+      }).then((result) => {
+        this.mItem = result.data.rs.data;
+        this.nCount = result.data.counts;
+        // console.log(result.data);
+      });
+      this.load = false;
+    },
+    onPages(page) {
+      this.nPage = page;
+      console.log(this.nPage);
+    },
+    onShow() {
+      console.log("ok");
+    },
+  },
+  computed: {
+    HeaderColumn() {
+      return [
+        {
+          text: this.$t("table.tbcompany.NO"),
+          align: "start",
+          sortable: false,
+          value: "cpn_Id",
+        },
+        { text: this.$t("table.tbcompany.company_name"), value: "cpn_name" },
+        {
+          text: this.$t("table.tbcompany.serialCompany"),
+          value: "cpn_serialNumber",
+        },
+        { text: this.$t("table.tbcompany.phoneNumber"), value: "cpn_phone" },
+        { text: this.$t("table.tbcompany.tell"), value: "cpn_tell" },
+        { text: this.$t("table.tbcompany.content"), value: "cpn_content" },
+        { text: this.$t("table.tbcompany.fromDate"), value: "cpn_fromDate" },
+        { text: this.$t("table.tbcompany.endDate"), value: "cpn_endDate" },
+        { text: this.$t("table.tbcompany.status"), value: "cpn_state" },
+        { text: this.$t("table.tbcompany.createdAt"), value: "createdAt" },
+        { text: this.$t("table.tbcompany.updatedAt"), value: "updatedAt" },
+        { text: this.$t("table.active"), value: "active" },
+      ];
+    },
+  },
+};
+</script>
+<style></style>

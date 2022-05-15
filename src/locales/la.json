@@ -1,11 +1,16 @@
 {
     "message": "ສະບາຍດີ i18n !!",
+    "title": {
+        "titleCompany": "ຈັດການຂໍ້ມູນບັນຊີ"
+      },
     "text": {
         "titleLogin": "ເຂົ້າສູ້ລະບົບ",
         "formatPassowrd": "ລືມລະຫັດຜ່ານ",
         "titleNotification": "ຂໍ້ມູນແຈັງເຕືອນ",
         "msgEamil": "ກະລຸນາປ້ອນອີເມວທີ່ມີຢູ່ໃນລະບົບ ເທົ່ານັ້ນ",
-        "titleNewpwd": "ສ້າງລະຫັດຜ່ານໃໝ່"
+        "titleNewpwd": "ສ້າງລະຫັດຜ່ານໃໝ່",
+        "logout": "ອອກຈາກລະບົບ",
+        "list": "ລາຍການ"
     },
     "txtfield": {
         "emailandphone": "ອິເມວ ຫຼື ເບິໂທ",
@@ -20,6 +25,24 @@
     "btn": {
         "submit": "ຕົກລົງ",
         "cancel": "ຍົກເລີກ",
-        "send": "ສົ່ງຂໍ້ມູນ"
-    }
+        "send": "ສົ່ງຂໍ້ມູນ",
+        "add": "ເພີ່ມບັນຊີ"
+    },
+    "table": {
+        "active": "ເລືອກ",
+          "tbcompany": {
+            "NO": "ລ/ດ",
+            "company_name": "ຊື່ບໍລິສັດ",
+            "serialCompany": "ເລກທະບຽນ",
+            "phoneNumber": "ເບິໂທ",
+            "tell": "ເບີໂທສຳຮອງ",
+            "content": "ລາຍລະອຽດ",
+            "fromDate": "ວັນເວລາເລີ່ມຕົ້ນ", 
+            "endDate": "ວັນທີເວລາສີ່ນສຸດ",
+            "status": "ສະຖານະ",
+            "createdAt": "ວັນທີ່",
+            "updatedAt": "ອັບເລດ"
+          }
+      }
+
   }

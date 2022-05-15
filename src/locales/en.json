@@ -1,3 +1,49 @@
 {
-  "message": "hello i18n !!"
+  "message": "ສະບາຍດີ i18n !!",
+  "title": {
+    "titleCompany": "Account Management"
+  },
+  "text": {
+      "titleLogin": "Login",
+      "formatPassowrd": "ForgetPassword",
+      "titleNotification": "Notification Data",
+      "msgEamil": "Please Enter Only Email into System",
+      "titleNewpwd": "Create New Password",
+      "logout": "Logout",
+      "list": "list"
+
+  },
+  "txtfield": {
+      "emailandphone": "Email Or Phone Number",
+      "password": "Password"
+  },
+  "validate": {
+      "require": "Please Enter value",
+      "email": "Email is Validate",
+      "password": "Password is Inccurect !!",
+      "worning": "Please Enter value to again"
+  },
+  "btn": {
+      "submit": "Accept",
+      "cancel": "Cancel",
+      "send": "Send complete",
+      "add": "Add"
+
+  },
+  "table": {
+    "active": "Activity",
+      "tbcompany": {
+        "NO": "NO",
+        "company_name": "Company Name",
+        "serialCompany": "Serial of Company",
+        "phoneNumber": "Phone Number",
+        "tell": "Tell",
+        "content": "Content...",
+        "fromDate": "Start from of Date", 
+        "endDate": "End Date",
+        "status": "State",
+        "createdAt": "Date",
+        "updatedAt": "Up"
+      }
+  }
 }
