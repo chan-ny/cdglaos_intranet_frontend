@@ -1,23 +1,19 @@
 <template>
-  <div class="px-2">
+  <div class="px-1">
     <v-btn
       elevation="5"
-      class="mr-2 font16r"
-      :color="color"
+      class="mr-2 font16r cap"
+      color="success"
       tile
       dense
       dark
       @click="onAdd"
-      >{{ title }}</v-btn
+      >{{ $t("btn.submit") }}</v-btn
     >
   </div>
 </template>
 <script>
 export default {
-  props: {
-    title: String,
-    color: String,
-  },
   methods: {
     onAdd() {
       this.$emit("onAdd");

@@ -4,14 +4,18 @@ import Cancel from "./btn/btnCancel.vue";
 import Toolbar from "./layout/toolbar.vue";
 import Add from "./btn/btnAdd.vue";
 import Pagination from "./layout/pagination.vue";
+import Accept from "./btn/btnAccept.vue";
+import Submit from "./btn/btnAdd.vue";
 
 function RednderComponent(App) {
   App.component("Navigation-Drawer", Navigation);
   App.component("FormatPassword", FormatPassword);
-  App.component("Cancel", Cancel);
+  App.component("btnCancel", Cancel);
   App.component("Toolbar", Toolbar);
   App.component("btnAdd", Add);
   App.component("pagination", Pagination);
+  App.component("btnAccept", Accept);
+  App.component("btnSubmit", Submit);
 }
 
 export { RednderComponent };

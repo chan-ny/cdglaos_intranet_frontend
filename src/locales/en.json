@@ -1,49 +1,65 @@
 {
   "message": "ສະບາຍດີ i18n !!",
   "title": {
-    "titleCompany": "Account Management"
+    "titleCompany": "Account Management",
+    "titleAddcompany": "Add company",
+    "company": "Company Data",
+    "CEO": "Chief Executive offical"
   },
   "text": {
-      "titleLogin": "Login",
-      "formatPassowrd": "ForgetPassword",
-      "titleNotification": "Notification Data",
-      "msgEamil": "Please Enter Only Email into System",
-      "titleNewpwd": "Create New Password",
-      "logout": "Logout",
-      "list": "list"
-
+    "titleLogin": "Login",
+    "formatPassowrd": "ForgetPassword",
+    "titleNotification": "Notification Data",
+    "msgEamil": "Please Enter Only Email into System",
+    "titleNewpwd": "Create New Password",
+    "logout": "Logout",
+    "list": "list"
   },
   "txtfield": {
-      "emailandphone": "Email Or Phone Number",
-      "password": "Password"
+    "emailandphone": "Email Or Phone Number",
+    "password": "Password",
+    "selectMonth": "Choose Mouth"
   },
   "validate": {
-      "require": "Please Enter value",
-      "email": "Email is Validate",
-      "password": "Password is Inccurect !!",
-      "worning": "Please Enter value to again"
+    "require": "Please Enter value",
+    "email": "Email is Validate",
+    "password": "Password is Inccurect !!",
+    "worning": "Please Enter value to again"
   },
   "btn": {
-      "submit": "Accept",
-      "cancel": "Cancel",
-      "send": "Send complete",
-      "add": "Add"
-
+    "submit": "continuse",
+    "cancel": "Cancel",
+    "send": "Send complete",
+    "add": "Add",
+    "accept": "Accept"
   },
   "table": {
     "active": "Activity",
-      "tbcompany": {
-        "NO": "NO",
-        "company_name": "Company Name",
-        "serialCompany": "Serial of Company",
-        "phoneNumber": "Phone Number",
-        "tell": "Tell",
-        "content": "Content...",
-        "fromDate": "Start from of Date", 
-        "endDate": "End Date",
-        "status": "State",
-        "createdAt": "Date",
-        "updatedAt": "Up"
-      }
+    "tbcompany": {
+      "NO": "NO",
+      "company_name": "Company Name",
+      "serialCompany": "Serial of Company",
+      "phoneNumber": "Phone Number",
+      "tell": "Tell",
+      "content": "Content...",
+      "fromDate": "Start from of Date",
+      "endDate": "End Date",
+      "status": "State",
+      "createdAt": "Date",
+      "updatedAt": "Up"
+    }
+  },
+  "textfield": {
+    "NO": "Code",
+    "company": {
+      "name": "Company Name",
+      "serialCompany": "Company No",
+      "phone": "Phone Number",
+      "Tell": "Tell",
+      "content": "Content",
+      "fromDate": "From Date",
+      "endDate": "End Date",
+      "state": "State"
+    }
   }
 }

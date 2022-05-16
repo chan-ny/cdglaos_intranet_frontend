@@ -3,19 +3,19 @@
     <v-btn
       elevation="5"
       class="mr-2 font14r cap"
-      color="red"
+      color="primary"
       dense
       dark
-      @click="onCancel"
-      >{{ $t("btn.cancel") }}</v-btn
+      @click="onAccept"
+      >{{ $t("btn.accept") }}</v-btn
     >
   </div>
 </template>
 <script>
 export default {
   methods: {
-    onCancel() {
-      this.$emit("onCancel");
+    onAccept() {
+      this.$emit("onAccept");
     },
   },
 };

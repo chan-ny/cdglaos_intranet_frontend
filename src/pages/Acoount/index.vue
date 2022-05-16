@@ -1,56 +1,90 @@
 <template>
   <div>
     <v-card class="ma-2" elevation="4">
-      <div class="pa-4 font20b">{{ $t("title.titleCompany") }}</div>
-      <div class="text-right pr-4 mt-n12">
-        <btnAdd :title="this.$t('btn.add')" :color="'success'" />
-      </div>
-      <div class="font16r pl-4">
-        <strong class="blue--text">{{ nCount }}</strong> {{ $t("text.list") }}
-      </div>
-      <v-data-table
-        :headers="HeaderColumn"
-        :items="mItem"
-        :loading="load"
-        class="elevation-4 mt-4 mx-2 font"
-        :footer-props="{ 'items-per-page-options': [20] }"
-        :items-per-page="20"
-      >
-        <template v-slot:[`item.cpn_content`]="{ item }">
-          <a @click="mShowText = !mShowText"
-            ><div v-if="mShowText">
-              {{ item.cpn_content | truncate(60, ".....") }}
+      <!-- tabs menu -->
+      <v-tabs color="primary" elevation-1 right>
+        <v-tab class="cap">{{ $t("title.company") }}</v-tab>
+        <v-tab class="cap">{{ $t("title.CEO") }}</v-tab>
+        <v-tab-item>
+          <!-- card conten one  -->
+          <v-card class="ma-2" elevation="4">
+            <div class="pa-4 font20b">{{ $t("title.titleCompany") }}</div>
+            <div class="text-right pr-4 mt-n12">
+              <btnAdd
+                :title="this.$t('btn.add')"
+                :color="'success'"
+                @onAdd="aDialog = !aDialog"
+              />
             </div>
-            <div v-else>
-              {{ item.cpn_content }}
-            </div></a
-          >
-        </template>
-        <template v-slot:[`item.cpn_fromDate`]="{ item }">
-          <span>{{
-            new Date(item.cpn_fromDate).toISOString().slice(0, 10)
-          }}</span>
-        </template>
-        <template v-slot:[`item.cpn_endDate`]="{ item }">
-          <span>{{
-            new Date(item.cpn_endDate).toISOString().slice(0, 10)
-          }}</span>
-        </template>
-        <template v-slot:[`item.createdAt`]="{ item }">
-          <span>{{ new Date(item.createdAt).toISOString().slice(0, 10) }}</span>
-        </template>
-        <template v-slot:[`item.updatedAt`]="{ item }">
-          <span>{{ new Date(item.updatedAt).toISOString().slice(0, 10) }}</span>
-        </template>
-      </v-data-table>
-
-      <pagination class="ma-2" :mCounts="nCount" @onPage="onPages" />
+            <div class="font16r pl-4">
+              <strong class="blue--text">{{ nCount }}</strong>
+              {{ $t("text.list") }}
+            </div>
+            <v-data-table
+              solo
+              :headers="HeaderColumn"
+              :items="mItem"
+              :loading="load"
+              class="elevation-4 mt-4 mx-2 font"
+              :footer-props="{ 'items-per-page-options': [20] }"
+              :items-per-page="20"
+            >
+              <template v-slot:[`item.cpn_content`]="{ item }">
+                <a @click="mShowText = !mShowText"
+                  ><div v-if="mShowText">
+                    {{ item.cpn_content | truncate(60, ".....") }}
+                  </div>
+                  <div v-else>
+                    {{ item.cpn_content }}
+                  </div></a
+                >
+              </template>
+              <template v-slot:[`item.cpn_fromDate`]="{ item }">
+                <span>{{
+                  new Date(item.cpn_fromDate).toISOString().slice(0, 10)
+                }}</span>
+              </template>
+              <template v-slot:[`item.cpn_endDate`]="{ item }">
+                <span>{{
+                  new Date(item.cpn_endDate).toISOString().slice(0, 10)
+                }}</span>
+              </template>
+              <template v-slot:[`item.createdAt`]="{ item }">
+                <span>{{
+                  new Date(item.createdAt).toISOString().slice(0, 10)
+                }}</span>
+              </template>
+              <template v-slot:[`item.updatedAt`]="{ item }">
+                <span>{{
+                  new Date(item.updatedAt).toISOString().slice(0, 10)
+                }}</span>
+              </template>
+            </v-data-table>
+            <pagination class="ma-2" :mCounts="nCount" @onPage="onPages" />
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <!-- card conten two  -->
+          <v-card class="ma-2" elevation="4"> ol </v-card>
+        </v-tab-item>
+      </v-tabs>
+      <!-- end tabs menu -->
     </v-card>
+    <!-- area code Add -->
+    <From-add
+      :dialogform="aDialog"
+      @onClose="aDialog = !aDialog"
+      @onAdd="onSaveCompany"
+    />
   </div>
 </template>
 <script>
 import AccountService from "../../service/AccountService";
+import Add from "./add.vue";
 export default {
+  components: {
+    "From-add": Add,
+  },
   data() {
     return {
       mItem: [],
@@ -58,6 +92,8 @@ export default {
       nCount: 0,
       load: false,
       mShowText: true,
+      // area from add
+      aDialog: false,
     };
   },
   created() {
@@ -74,9 +110,16 @@ export default {
       }).then((result) => {
         this.mItem = result.data.rs.data;
         this.nCount = result.data.counts;
-        // console.log(result.data);
+        // console.log(this.mItem);
       });
       this.load = false;
+    },
+    async onSaveCompany(item) {
+      await AccountService.create(item).then((result) => {
+        this.aDialog = false;
+        this.initail();
+        console.log(result);
+      });
     },
     onPages(page) {
       this.nPage = page;
