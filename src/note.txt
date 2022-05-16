@@ -1,0 +1,69 @@
+# button 
+   <btnAdd @onAdd="aDialog = !aDialog" />
+
+   <btnCancel @onCancel="mStartMenu = false" />
+
+   <btnAccept @onAccept="$refs.mStartMenu.save(mData.cpn_fromDate)"/>
+
+   <btnSubmit @onSubmit="onSubmit" />
+
+
+# data table 
+   :loading="load"
+   class="elevation-3 mt-4 mx-2 font grey lighten-4"
+   :footer-props="{ 'items-per-page-opti: [20] }"
+   :items-per-page="20"
+
+# display short test and full text
+    <template v-slot:[`item.cpn_content`]="{ item }">
+    <a @click="mShowText = !mShowText"
+    <div v-if="mShowText">
+    {{ item.cpn_content | truncate(60, ".....") }}
+    </div>
+    <div v-else>
+    {{ item.cpn_content }}
+    </d</a>
+    </template>
+
+
+# format datetime 
+    <template v-slot:[`item.cpn_fromDate`]="{ item }">
+    <span>{{
+    new Date(item.cpn_fromDate).toISOString().slice(0, 10)
+     }}</span>
+    </template>
+
+
+# pagination 
+    <pagination class="ma-2" :mCounts="nCount" @onPage="onPages" />
+
+
+# progress lisner
+    <progressLiner :loading="loading" />
+
+
+# textfield
+    <v-text-field :label="this.$t('textfield.company.name')" v-model="mData.cpn_name"
+    solo
+    required
+    clearable ></v-text-field>
+
+# template textfield
+    <template slot="prepend-inner">
+    <v-icon>mdi-ca</v</span>
+    </template>
+    <template slot="label">
+    <span>{{  }}</span>
+    </template>
+
+# Response Server side
+   -result
+      result.data.msg
+      result.data.rs
+
+    err
+      let err = { ...error.response.data };
+      console.log(err.msg);
+  
+   
+ 

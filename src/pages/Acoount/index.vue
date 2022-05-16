@@ -7,14 +7,10 @@
         <v-tab class="cap">{{ $t("title.CEO") }}</v-tab>
         <v-tab-item>
           <!-- card conten one  -->
-          <v-card class="ma-2" elevation="4">
+          <v-card elevation="4">
             <div class="pa-4 font20b">{{ $t("title.titleCompany") }}</div>
             <div class="text-right pr-4 mt-n12">
-              <btnAdd
-                :title="this.$t('btn.add')"
-                :color="'success'"
-                @onAdd="aDialog = !aDialog"
-              />
+              <btnAdd @onAdd="aDialog = !aDialog" />
             </div>
             <div class="font16r pl-4">
               <strong class="blue--text">{{ nCount }}</strong>
@@ -25,7 +21,7 @@
               :headers="HeaderColumn"
               :items="mItem"
               :loading="load"
-              class="elevation-4 mt-4 mx-2 font"
+              class="elevation-3 mt-4 mx-2 font grey lighten-4"
               :footer-props="{ 'items-per-page-options': [20] }"
               :items-per-page="20"
             >
@@ -74,13 +70,14 @@
     <From-add
       :dialogform="aDialog"
       @onClose="aDialog = !aDialog"
-      @onAdd="onSaveCompany"
+      @onSubmit="onSaveCompany"
     />
   </div>
 </template>
 <script>
 import AccountService from "../../service/AccountService";
 import Add from "./add.vue";
+import MSG from "../../components/notification/messageRight";
 export default {
   components: {
     "From-add": Add,
@@ -118,12 +115,13 @@ export default {
       await AccountService.create(item).then((result) => {
         this.aDialog = false;
         this.initail();
-        console.log(result);
+        MSG.showMessage("success", result.data.msg, 3000);
+        // console.log(result.data.msg);
       });
     },
     onPages(page) {
       this.nPage = page;
-      console.log(this.nPage);
+      this.initail();
     },
     onShow() {
       console.log("ok");

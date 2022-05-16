@@ -2,25 +2,20 @@
   <div class="px-2">
     <v-btn
       elevation="5"
-      class="mr-2"
-      :color="color"
-      tile
+      class="mr-2 font14r"
+      color="success"
       dense
       dark
       @click="onSubmit"
-      >{{title}}</v-btn
+      >{{ $t("btn.submit") }}</v-btn
     >
   </div>
 </template>
 <script>
 export default {
-  props: {
-    title: String,
-    color: String
-  },
   methods: {
     onSubmit() {
-      this.$emit("onSubmit")
+      this.$emit("onSubmit");
     },
   },
 };

@@ -142,7 +142,8 @@ export default {
         })
         .catch((error) => {
           this.mWorning = true;
-          console.log({ ...error.response.data });
+          let err = { ...error.response.data };
+          console.log(err.msg);
         });
     },
     onChangeLanguage(item) {

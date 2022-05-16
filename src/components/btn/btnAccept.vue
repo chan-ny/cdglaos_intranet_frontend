@@ -6,6 +6,7 @@
       color="primary"
       dense
       dark
+      :loading="loading"
       @click="onAccept"
       >{{ $t("btn.accept") }}</v-btn
     >
@@ -13,6 +14,9 @@
 </template>
 <script>
 export default {
+  props: {
+    loading: Boolean,
+  },
   methods: {
     onAccept() {
       this.$emit("onAccept");
