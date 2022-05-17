@@ -32,7 +32,12 @@
             {{ $t("text.titleLogin") }}
           </div>
           <v-card-text class="px-6">
-            <v-form class="font14r" @submit.prevent="onLogin">
+            <v-form
+              class="font14r"
+              ref="form"
+              lazy-validation
+              @submit.prevent="onLogin"
+            >
               <v-text-field
                 v-model="mEmail"
                 name="email"
@@ -126,25 +131,27 @@ export default {
       this.dDialog = true;
     },
     async onLogin() {
-      LoginService.login({
-        uemail: this.mEmail,
-        upassowrd: this.mPassword,
-      })
-        .then((result) => {
-          this.mWorning = false;
-          this.$store.dispatch("setToken", result.data.token);
-          this.$store.dispatch("setUser", result.data.users);
-          this.$store.dispatch("setMenu", result.data.menu);
-          this.$router.push({
-            name: "HomeView",
-          });
-          // console.log(result);
+      if (this.$refs.form.validate()) {
+        LoginService.login({
+          uemail: this.mEmail,
+          upassowrd: this.mPassword,
         })
-        .catch((error) => {
-          this.mWorning = true;
-          let err = { ...error.response.data };
-          console.log(err.msg);
-        });
+          .then((result) => {
+            this.mWorning = false;
+            this.$store.dispatch("setToken", result.data.token);
+            this.$store.dispatch("setUser", result.data.users);
+            this.$store.dispatch("setMenu", result.data.menu);
+            this.$router.push({
+              name: "HomeView",
+            });
+            // console.log(result);
+          })
+          .catch((error) => {
+            this.mWorning = true;
+            let err = { ...error.response.data };
+            console.log(err.msg);
+          });
+      }
     },
     onChangeLanguage(item) {
       this.$store.dispatch("setLanguage", item.id);

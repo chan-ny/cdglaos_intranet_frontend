@@ -3,6 +3,8 @@
   "title": {
     "titleCompany": "Account Management",
     "titleAddcompany": "Add company",
+    "titleEditcompany": "Edit company",
+    "titleRenewCompany": "Conpany Renew permission",
     "company": "Company Data",
     "CEO": "Chief Executive offical"
   },
@@ -31,7 +33,8 @@
     "cancel": "Cancel",
     "send": "Send complete",
     "add": "Add",
-    "accept": "Accept"
+    "accept": "Accept",
+    "onClose": "Update"
   },
   "table": {
     "active": "Activity",
@@ -61,5 +64,17 @@
       "endDate": "End Date",
       "state": "State"
     }
+  },
+  "validation": {
+    "require": "please Required",
+    "phone": "The phone number is not compare",
+    "space": "should not space",
+    "number": "it must be Numeric"
+  },
+  "Alert": {
+    "question": "Are you sure ? to do process ",
+    "cotentDelete": "Your proccess to Remove file",
+    "yes": "yes",
+    "messageDel": "Delete is success"
   }
 }

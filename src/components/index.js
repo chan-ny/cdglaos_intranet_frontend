@@ -7,6 +7,8 @@ import Pagination from "./layout/pagination.vue";
 import Accept from "./btn/btnAccept.vue";
 import Submit from "./btn/btnSubmit.vue";
 import LoadLiner from "./progress/progressliner.vue";
+import Speedlial from "./btnTable/speed-dialcompny.vue";
+import Edit from "./btn/btnEdit.vue";
 
 function RednderComponent(App) {
   App.component("Navigation-Drawer", Navigation);
@@ -18,6 +20,8 @@ function RednderComponent(App) {
   App.component("btnAccept", Accept);
   App.component("btnSubmit", Submit);
   App.component("progressLiner", LoadLiner);
+  App.component("speedlial", Speedlial);
+  App.component("btnEdit", Edit);
 }
 
 export { RednderComponent };

@@ -63,11 +63,18 @@ td {
 .cap {
   text-transform: capitalize !important;
 }
-.swal2-popup{
+.swal2-popup {
   width: 25em !important;
   max-width: 80% !important;
   background: #ffffff !important;
 }
-.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+.swal2-container.swal2-backdrop-show,
+.swal2-container.swal2-noanimation {
   background: rgb(0 0 0 / 5%) !important;
+}
+.swal2-title {
+  font-size: 1.3em !important;
+}
+.swal2-header {
+  padding: 0em !important;
 }

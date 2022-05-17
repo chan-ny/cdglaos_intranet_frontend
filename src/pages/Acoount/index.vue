@@ -3,8 +3,8 @@
     <v-card class="ma-2" elevation="4">
       <!-- tabs menu -->
       <v-tabs color="primary" elevation-1 right>
-        <v-tab class="cap">{{ $t("title.company") }}</v-tab>
-        <v-tab class="cap">{{ $t("title.CEO") }}</v-tab>
+        <v-tab class="cap font16r">{{ $t("title.company") }}</v-tab>
+        <v-tab class="cap font16r">{{ $t("title.CEO") }}</v-tab>
         <v-tab-item>
           <!-- card conten one  -->
           <v-card elevation="4">
@@ -28,7 +28,7 @@
               <template v-slot:[`item.cpn_content`]="{ item }">
                 <a @click="mShowText = !mShowText"
                   ><div v-if="mShowText">
-                    {{ item.cpn_content | truncate(60, ".....") }}
+                    {{ item.cpn_content | truncate(20, ".....") }}
                   </div>
                   <div v-else>
                     {{ item.cpn_content }}
@@ -55,6 +55,13 @@
                   new Date(item.updatedAt).toISOString().slice(0, 10)
                 }}</span>
               </template>
+              <template v-slot:[`item.active`]="{ item }">
+                <speedlial
+                  @onSync="onRenew(item)"
+                  @onEdit="onEdit(item)"
+                  @onDelete="onDelete(item)"
+                />
+              </template>
             </v-data-table>
             <pagination class="ma-2" :mCounts="nCount" @onPage="onPages" />
           </v-card>
@@ -66,21 +73,35 @@
       </v-tabs>
       <!-- end tabs menu -->
     </v-card>
+
     <!-- area code Add -->
-    <From-add
+    <Addform
       :dialogform="aDialog"
       @onClose="aDialog = !aDialog"
       @onSubmit="onSaveCompany"
     />
+    <!-- area code Edit -->
+    <Editform
+      :dialogform="eDialog"
+      :mObject="mObject"
+      @onClose="eDialog = !eDialog"
+      @ononEdit="onUpdateCompany"
+    />
+    <!-- area code renew -->
+    <RenewForm :dialog="rDialog" @onClose="rDialog = !rDialog" />
   </div>
 </template>
 <script>
 import AccountService from "../../service/AccountService";
-import Add from "./add.vue";
+import Add from "./companyCreate.vue";
+import Edit from "./compnayEdit.vue";
+import Renew from "./companyRenew.vue";
 import MSG from "../../components/notification/messageRight";
 export default {
   components: {
-    "From-add": Add,
+    Addform: Add,
+    Editform: Edit,
+    RenewForm: Renew,
   },
   data() {
     return {
@@ -89,14 +110,18 @@ export default {
       nCount: 0,
       load: false,
       mShowText: true,
-      // area from add
+      // area from
       aDialog: false,
+      eDialog: false,
+      mObject: null,
+      rDialog: false,
     };
   },
   created() {
     this.initail();
   },
   methods: {
+    // initail data load
     async initail() {
       this.load = true;
       await AccountService.display({
@@ -111,6 +136,8 @@ export default {
       });
       this.load = false;
     },
+
+    // insert company data
     async onSaveCompany(item) {
       await AccountService.create(item).then((result) => {
         this.aDialog = false;
@@ -119,12 +146,49 @@ export default {
         // console.log(result.data.msg);
       });
     },
+
+    //update company date
+    async onUpdateCompany(item) {
+      await AccountService.update(item).then((result) => {
+        this.eDialog = false;
+        this.initail();
+        MSG.showMessage("success", result.data.msg, 3000);
+      });
+      // console.log(item);
+    },
+
+    // render pagination
     onPages(page) {
       this.nPage = page;
       this.initail();
     },
-    onShow() {
-      console.log("ok");
+
+    // click Renew
+    onRenew(item) {
+      this.rDialog = true;
+      console.log("renew" + item);
+    },
+
+    //click Edit
+    onEdit(item) {
+      this.eDialog = true;
+      this.mObject = item;
+    },
+
+    //click Delete
+    async onDelete(item) {
+      await MSG.Question(
+        this.$t("Alert.question"),
+        this.$t("Alert.cotentDelete"),
+        this.$t("Alert.yes")
+      ).then((result) => {
+        if (result) {
+          AccountService.delete(item.cpn_Id).then(() => {
+            this.initail();
+            MSG.showMessage("success", this.$t("Alert.messageDel"), 3000);
+          });
+        }
+      });
     },
   },
   computed: {
@@ -149,7 +213,7 @@ export default {
         { text: this.$t("table.tbcompany.status"), value: "cpn_state" },
         { text: this.$t("table.tbcompany.createdAt"), value: "createdAt" },
         { text: this.$t("table.tbcompany.updatedAt"), value: "updatedAt" },
-        { text: this.$t("table.active"), value: "active" },
+        { text: this.$t("table.active"), sortable: false, value: "active" },
       ];
     },
   },
