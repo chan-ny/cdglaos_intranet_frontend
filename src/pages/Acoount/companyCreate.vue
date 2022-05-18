@@ -28,7 +28,7 @@
                       solo
                       required
                       clearable
-                      :rules="mRules.Name"
+                      :rules="[mValid.require]"
                     ></v-text-field>
                     <v-text-field
                       :label="this.$t('textfield.company.serialCompany')"
@@ -37,7 +37,7 @@
                       solo
                       required
                       clearable
-                      :rules="mRules.Serialcompany"
+                      :rules="[mValid.require]"
                     ></v-text-field>
                     <v-text-field
                       :label="this.$t('textfield.company.phone')"
@@ -46,7 +46,13 @@
                       solo
                       required
                       clearable
-                      :rules="mRules.Phone"
+                      :rules="[
+                        mValid.require,
+                        mValid.phone,
+                        mValid.number,
+                        mValid.space,
+                        mValid.specialCharactor,
+                      ]"
                       :counter="13"
                     ></v-text-field>
                     <v-text-field
@@ -56,7 +62,13 @@
                       solo
                       required
                       clearable
-                      :rules="mRules.Tell"
+                      :rules="[
+                        mValid.require,
+                        mValid.tell,
+                        mValid.number,
+                        mValid.space,
+                        mValid.specialCharactor,
+                      ]"
                     ></v-text-field>
                     <!--  field date  -->
                     <v-menu
@@ -103,7 +115,7 @@
                       :items="mSelectMonth"
                       v-model="mValue"
                       :label="$t('txtfield.selectMonth')"
-                      :rules="mRules.selMonth"
+                      :rules="[mValid.require]"
                       prepend-inner-icon="mdi-checkbox-multiple-outline"
                     ></v-select>
                     <!-- end data tiem -->
@@ -155,7 +167,7 @@
                       row-height="60"
                       append-icon="mdi-comment"
                       :label="this.$t('textfield.company.content')"
-                      :rules="mRules.Content"
+                      :rules="[mValid.require]"
                     >
                     </v-textarea>
                   </v-col>
@@ -178,6 +190,7 @@
   </div>
 </template>
 <script>
+import valid from "../../helper/rulesField.js";
 export default {
   props: {
     dialogform: Boolean,
@@ -231,6 +244,11 @@ export default {
         this.loading = true;
         this.$emit("onSubmit", this.mData);
       }
+    },
+  },
+  computed: {
+    mValid() {
+      return { ...valid.Rules };
     },
   },
   watch: {

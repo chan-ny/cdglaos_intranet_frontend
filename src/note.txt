@@ -66,7 +66,10 @@
       console.log(err.msg);
   
 #validate
-    (v) => !!v || this.$t("validation.require"),
-    (v) => (v && v.length == 13) || this.$t("validation.phone"),
-    (v) => !isN(v) || this.$t("validation.number"),
-    (v) => (v || "").indexOf(" ") < 0 || this.$t("validation.space"),
+    import valid from "../../helper/rulesField.js";
+    
+    computed: {
+    mValid() {
+      return { ...valid.Rules };
+    },
+    },

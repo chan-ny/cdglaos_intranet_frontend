@@ -7,7 +7,7 @@
             ><div class="font20b">{{ $t("title.titleEditcompany") }}</div></span
           >
         </v-card-title>
-        <v-card-text class="mt-4">
+        <v-card-text class="mt-4 font14r">
           <v-form>
             <v-text-field
               :label="this.$t('textfield.company.fromDate')"

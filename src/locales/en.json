@@ -34,7 +34,9 @@
     "send": "Send complete",
     "add": "Add",
     "accept": "Accept",
-    "onClose": "Update"
+    "onClose": "Update",
+    "edit": "Edit"
+
   },
   "table": {
     "active": "Activity",
@@ -69,7 +71,9 @@
     "require": "please Required",
     "phone": "The phone number is not compare",
     "space": "should not space",
-    "number": "it must be Numeric"
+    "number": "it must be Numeric",
+    "charactor": "it must be Charactor",
+    "specialcharactor": " Dot not have special the charactor"
   },
   "Alert": {
     "question": "Are you sure ? to do process ",
