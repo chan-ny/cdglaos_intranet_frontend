@@ -9,6 +9,8 @@ import Submit from "./btn/btnSubmit.vue";
 import LoadLiner from "./progress/progressliner.vue";
 import Speedlial from "./btnTable/speed-dialcompny.vue";
 import Edit from "./btn/btnEdit.vue";
+import ChangeImage from "./btnTable/changeImage.vue";
+import formatDate from "./btnTable/datetime.vue";
 
 function RednderComponent(App) {
   App.component("Navigation-Drawer", Navigation);
@@ -22,6 +24,8 @@ function RednderComponent(App) {
   App.component("progressLiner", LoadLiner);
   App.component("speedlial", Speedlial);
   App.component("btnEdit", Edit);
+  App.component("changeImage", ChangeImage);
+  App.component("formatDate", formatDate);
 }
 
 export { RednderComponent };

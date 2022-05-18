@@ -40,6 +40,7 @@
   },
   "table": {
     "active": "Activity",
+    "logo":"Logo",
     "tbcompany": {
       "NO": "NO",
       "company_name": "Company Name",

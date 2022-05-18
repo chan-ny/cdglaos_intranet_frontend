@@ -7,12 +7,12 @@
       :transition="transition"
     >
       <template v-slot:activator>
-        <v-btn small v-model="fab" color="blue darken-2" dark fab>
+        <v-btn x-small v-model="fab" color="blue darken-2" dark fab>
           <v-icon v-if="fab"> mdi-close </v-icon>
           <v-icon v-else> mdi-dots-horizontal</v-icon>
         </v-btn>
       </template>
-      <v-btn fab dark small color="purple darken-1">
+      <v-btn fab dark small color="purple darken-1" @click="onCEO">
         <v-icon>mdi-account-plus</v-icon>
       </v-btn>
       <v-btn fab dark small color="green" @click="onSync">
@@ -47,6 +47,9 @@ export default {
     },
     onDelete() {
       this.$emit("onDelete");
+    },
+    onCEO() {
+      this.$emit("onCEO");
     },
   },
 };

@@ -217,22 +217,6 @@ export default {
         cpn_endDate: "",
         cpn_state: "active",
       },
-      mRules: {
-        Name: [(v) => !!v || this.$t("validation.require")],
-        Serialcompany: [(v) => !!v || this.$t("validation.require")],
-        Phone: [
-          (v) => !!v || this.$t("validation.require"),
-          (v) => (v && v.length == 13) || this.$t("validation.phone"),
-          (v) => !isNaN(v) || this.$t("validation.number"),
-        ],
-        Tell: [
-          (v) => !!v || this.$t("validation.require"),
-          (v) => !isNaN(v) || this.$t("validation.number"),
-          (v) => (v && v.length >= 7) || this.$t("validation.phone"),
-        ],
-        Content: [(v) => !!v || this.$t("validation.require")],
-        selMonth: [(v) => !!v || this.$t("validation.require")],
-      },
     };
   },
   methods: {

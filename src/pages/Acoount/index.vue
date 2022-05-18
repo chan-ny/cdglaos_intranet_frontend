@@ -16,8 +16,10 @@
               <strong class="blue--text">{{ nCount }}</strong>
               {{ $t("text.list") }}
             </div>
+
+            <!-- data table -->
             <v-data-table
-              solo
+              dense
               :headers="HeaderColumn"
               :items="mItem"
               :loading="load"
@@ -25,6 +27,12 @@
               :footer-props="{ 'items-per-page-options': [20] }"
               :items-per-page="20"
             >
+              <template v-slot:[`item.cpn_logo`]="{ item }" left>
+                <changeImage
+                  @onImage="onChengeImage"
+                  :mPath="mPath + 'company/' + item.cpn_logo"
+                />
+              </template>
               <template v-slot:[`item.cpn_content`]="{ item }">
                 <a @click="mShowText = !mShowText"
                   ><div v-if="mShowText">
@@ -36,30 +44,23 @@
                 >
               </template>
               <template v-slot:[`item.cpn_fromDate`]="{ item }">
-                <span>{{
-                  new Date(item.cpn_fromDate).toISOString().slice(0, 10)
-                }}</span>
+                <formatDate :mDate="item.cpn_fromDate" />
               </template>
               <template v-slot:[`item.cpn_endDate`]="{ item }">
-                <span>{{
-                  new Date(item.cpn_endDate).toISOString().slice(0, 10)
-                }}</span>
+                <formatDate :mDate="item.cpn_endDate" />
               </template>
               <template v-slot:[`item.createdAt`]="{ item }">
-                <span>{{
-                  new Date(item.createdAt).toISOString().slice(0, 10)
-                }}</span>
+                <formatDate :mDate="item.createdAt" />
               </template>
               <template v-slot:[`item.updatedAt`]="{ item }">
-                <span>{{
-                  new Date(item.updatedAt).toISOString().slice(0, 10)
-                }}</span>
+                <formatDate :mDate="item.updatedAt" />
               </template>
               <template v-slot:[`item.active`]="{ item }">
                 <speedlial
                   @onSync="onRenew(item)"
                   @onEdit="onEdit(item)"
                   @onDelete="onDelete(item)"
+                  @onCEO="onCEO(item)"
                 />
               </template>
             </v-data-table>
@@ -88,7 +89,14 @@
       @ononEdit="onUpdateCompany"
     />
     <!-- area code renew -->
-    <RenewForm :dialog="rDialog" @onClose="rDialog = !rDialog" />
+    <RenewForm
+      :dialog="rDialog"
+      @onClose="rDialog = !rDialog"
+      :mObject="mObject"
+      @onRenew="onRenewCompany"
+    />
+    <!-- area code ceo   -->
+    <Addceo :dialogform="ceoDialog" @onClose="ceoDialog = !ceoDialog" />
   </div>
 </template>
 <script>
@@ -96,12 +104,15 @@ import AccountService from "../../service/AccountService";
 import Add from "./companyCreate.vue";
 import Edit from "./compnayEdit.vue";
 import Renew from "./companyRenew.vue";
+import AddCEO from "../CEO/createCEO.vue";
 import MSG from "../../components/notification/messageRight";
+// const keyIP = process.env.VUE_APP_IP;
 export default {
   components: {
     Addform: Add,
     Editform: Edit,
     RenewForm: Renew,
+    Addceo: AddCEO,
   },
   data() {
     return {
@@ -115,6 +126,8 @@ export default {
       eDialog: false,
       mObject: null,
       rDialog: false,
+      ceoDialog: false,
+      mPath: process.env.VUE_APP_PATH,
     };
   },
   created() {
@@ -132,6 +145,7 @@ export default {
       }).then((result) => {
         this.mItem = result.data.rs.data;
         this.nCount = result.data.counts;
+
         // console.log(this.mItem);
       });
       this.load = false;
@@ -154,9 +168,19 @@ export default {
         this.initail();
         MSG.showMessage("success", result.data.msg, 3000);
       });
-      // console.log(item);
     },
 
+    //Renew Company data
+    async onRenewCompany(item) {
+      await AccountService.renew(item).then((result) => {
+        this.rDialog = false;
+        this.initail();
+        MSG.showMessage("success", result.data.msg, 3000);
+      });
+    },
+    onChengeImage(item) {
+      console.log(item);
+    },
     // render pagination
     onPages(page) {
       this.nPage = page;
@@ -166,7 +190,8 @@ export default {
     // click Renew
     onRenew(item) {
       this.rDialog = true;
-      console.log("renew" + item);
+      this.mObject = item;
+      // console.log("renew" + item);
     },
 
     //click Edit
@@ -175,6 +200,11 @@ export default {
       this.mObject = item;
     },
 
+    // click Add CEO
+    onCEO(item) {
+      this.ceoDialog = true;
+      console.log(item);
+    },
     //click Delete
     async onDelete(item) {
       await MSG.Question(
@@ -201,6 +231,10 @@ export default {
           value: "cpn_Id",
         },
         { text: this.$t("table.tbcompany.company_name"), value: "cpn_name" },
+        {
+          text: this.$t("table.logo"),
+          value: "cpn_logo",
+        },
         {
           text: this.$t("table.tbcompany.serialCompany"),
           value: "cpn_serialNumber",

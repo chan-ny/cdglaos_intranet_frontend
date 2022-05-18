@@ -73,3 +73,15 @@
       return { ...valid.Rules };
     },
     },
+
+# Image in table
+             <template v-slot:[`item.cpn_logo`]="{ item }" left>
+                <changeImage
+                  @onImage="onChengeImage"
+                  :mPath="mPath + 'company/' + item.cpn_logo"
+                />
+              </template>
+
+               mPath: process.env.VUE_APP_PATH,
+
+  

@@ -13,4 +13,7 @@ export default {
   delete(Id) {
     return axios.API().delete("company/" + Id);
   },
+  renew(value) {
+    return axios.API().put("company/renew/" + value.Id, value);
+  },
 };
