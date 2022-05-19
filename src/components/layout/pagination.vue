@@ -4,6 +4,7 @@
       v-model="mPage"
       :length="Math.ceil(mCounts / 20)"
       :total-visible="10"
+      circle
     ></v-pagination>
   </div>
 </template>

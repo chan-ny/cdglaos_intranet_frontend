@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer
-      color="#1c4587"
+      color="rgb(52, 51, 119)"
       :mini-variant.sync="mini"
       permanent
       dark

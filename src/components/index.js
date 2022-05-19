@@ -11,6 +11,9 @@ import Speedlial from "./btnTable/speed-dialcompny.vue";
 import Edit from "./btn/btnEdit.vue";
 import ChangeImage from "./btnTable/changeImage.vue";
 import formatDate from "./btnTable/datetime.vue";
+import Loader from "./progress/loader.vue";
+import SwithSatet from "./btnTable/swithState.vue";
+import TextShort from "./btnTable/textShort.vue";
 
 function RednderComponent(App) {
   App.component("Navigation-Drawer", Navigation);
@@ -26,6 +29,9 @@ function RednderComponent(App) {
   App.component("btnEdit", Edit);
   App.component("changeImage", ChangeImage);
   App.component("formatDate", formatDate);
+  App.component("loader", Loader);
+  App.component("swithstate", SwithSatet);
+  App.component("textshort", TextShort);
 }
 
 export { RednderComponent };

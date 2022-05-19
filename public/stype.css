@@ -73,11 +73,10 @@ td {
   background: rgb(0 0 0 / 5%) !important;
 }
 .swal2-title {
-  font-size: 1.3em !important;
+  font-size: 1em !important;
 }
 .swal2-popup {
   font-family: "Noto Sans Lao", sans-serif !important;
-
 }
 .swal2-header {
   padding: 0em !important;

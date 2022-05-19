@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- app Bar -->
-    <v-app-bar color="#1c4587" dense dark app>
+    <v-app-bar color="rgb(52, 51, 119)" dense dark app>
       <v-spacer></v-spacer>
       <div class="text-right">
         <v-menu offset-y>

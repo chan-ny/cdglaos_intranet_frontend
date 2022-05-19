@@ -36,11 +36,11 @@
     "accept": "Accept",
     "onClose": "Update",
     "edit": "Edit"
-
   },
   "table": {
     "active": "Activity",
-    "logo":"Logo",
+    "logo": "Logo",
+    "E/D": "Enable/Disable",
     "tbcompany": {
       "NO": "NO",
       "company_name": "Company Name",

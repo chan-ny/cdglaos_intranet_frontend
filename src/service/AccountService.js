@@ -13,6 +13,12 @@ export default {
   delete(Id) {
     return axios.API().delete("company/" + Id);
   },
+  changeIMG(Id, state) {
+    return axios.API().put("company/upimg/" + Id, state);
+  },
+  swithState(Id, value) {
+    return axios.API().put("company/dis/" + Id, value);
+  },
   renew(value) {
     return axios.API().put("company/renew/" + value.Id, value);
   },

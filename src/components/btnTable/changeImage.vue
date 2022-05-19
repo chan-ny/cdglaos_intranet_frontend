@@ -31,6 +31,7 @@
 export default {
   props: {
     mPath: String,
+    Id: Number,
   },
   data() {
     return {
@@ -45,7 +46,7 @@ export default {
       var input = event.target;
       if (input.files) {
         this.image = input.files[0];
-        this.$emit("onImage", this.image);
+        this.$emit("onImage", { img: this.image, Id: this.Id });
       }
     },
   },

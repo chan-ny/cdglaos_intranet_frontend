@@ -30,18 +30,15 @@
               <template v-slot:[`item.cpn_logo`]="{ item }" left>
                 <changeImage
                   @onImage="onChengeImage"
+                  :Id="item.cpn_Id"
                   :mPath="mPath + 'company/' + item.cpn_logo"
                 />
               </template>
+              <template v-slot:[`item.cpn_state`]="{ item }">
+                <swithstate :mObject="item" @onSwith="onSwith" />
+              </template>
               <template v-slot:[`item.cpn_content`]="{ item }">
-                <a @click="mShowText = !mShowText"
-                  ><div v-if="mShowText">
-                    {{ item.cpn_content | truncate(20, ".....") }}
-                  </div>
-                  <div v-else>
-                    {{ item.cpn_content }}
-                  </div></a
-                >
+                <textshort :mObject="item" />
               </template>
               <template v-slot:[`item.cpn_fromDate`]="{ item }">
                 <formatDate :mDate="item.cpn_fromDate" />
@@ -97,6 +94,9 @@
     />
     <!-- area code ceo   -->
     <Addceo :dialogform="ceoDialog" @onClose="ceoDialog = !ceoDialog" />
+
+    <!-- area loader -->
+    <loader :overlay="mLoader" />
   </div>
 </template>
 <script>
@@ -120,7 +120,6 @@ export default {
       nPage: 0,
       nCount: 0,
       load: false,
-      mShowText: true,
       // area from
       aDialog: false,
       eDialog: false,
@@ -128,11 +127,13 @@ export default {
       rDialog: false,
       ceoDialog: false,
       mPath: process.env.VUE_APP_PATH,
+      mLoader: false,
     };
   },
   created() {
     this.initail();
   },
+
   methods: {
     // initail data load
     async initail() {
@@ -178,8 +179,39 @@ export default {
         MSG.showMessage("success", result.data.msg, 3000);
       });
     },
-    onChengeImage(item) {
-      console.log(item);
+    async onChengeImage(item) {
+      this.mLoader = true;
+      const formdata = new FormData();
+      formdata.append("image", item.img);
+
+      // conver type
+      const config = {
+        hesders: { "content-type": "multipart/form-data" },
+      };
+
+      await AccountService.changeIMG(item.Id, formdata, config).then(
+        (result) => {
+          this.initail();
+          this.mLoader = false;
+          MSG.showMessage("success", result.data.msg, 3000);
+        }
+      );
+    },
+
+    // swith state
+    async onSwith(item) {
+      let state = "";
+      if (item.cpn_state == "active") {
+        state = "inactive";
+      } else {
+        state = "active";
+      }
+      await AccountService.swithState(item.cpn_Id, { state: state }).then(
+        (result) => {
+          this.initail();
+          MSG.showMessage("success", result.data.msg, 3000);
+        }
+      );
     },
     // render pagination
     onPages(page) {

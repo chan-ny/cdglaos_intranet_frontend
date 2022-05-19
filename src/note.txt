@@ -85,3 +85,9 @@
                mPath: process.env.VUE_APP_PATH,
 
   
+# bundle fromdate
+
+      // const form = Array.from(formdata.entries());
+      // for (const [name, value] of form) {
+      //   console.log({ name, value });
+      // }
