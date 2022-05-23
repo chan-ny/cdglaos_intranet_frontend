@@ -13,7 +13,7 @@
           <v-form ref="form">
             <v-text-field
               outlined
-              :label="this.$t('textfield.company.fromDate')"
+              :label="this.$t('textfield.fromDate')"
               v-model="mStartDate"
               prepend-inner-icon="mdi-calendar-range"
               dense
@@ -21,7 +21,7 @@
             ></v-text-field>
             <v-text-field
               outlined
-              :label="this.$t('textfield.company.endDate')"
+              :label="this.$t('textfield.endDate')"
               v-model="mEndDate"
               prepend-inner-icon="mdi-clipboard-text-clock"
               dense
@@ -54,7 +54,6 @@
 </template>
 <script>
 import valid from "../../helper/rulesField.js";
-
 export default {
   props: {
     dialog: Boolean,

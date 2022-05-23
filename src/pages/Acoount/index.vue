@@ -44,7 +44,10 @@
                 <formatDate :mDate="item.cpn_fromDate" />
               </template>
               <template v-slot:[`item.cpn_endDate`]="{ item }">
-                <formatDate :mDate="item.cpn_endDate" />
+                <datetimeexpried
+                  :mExpried="item.ex"
+                  :mDate="item.cpn_endDate"
+                />
               </template>
               <template v-slot:[`item.createdAt`]="{ item }">
                 <formatDate :mDate="item.createdAt" />
@@ -54,6 +57,7 @@
               </template>
               <template v-slot:[`item.active`]="{ item }">
                 <speedlial
+                  :mCEO="item"
                   @onSync="onRenew(item)"
                   @onEdit="onEdit(item)"
                   @onDelete="onDelete(item)"
@@ -66,7 +70,9 @@
         </v-tab-item>
         <v-tab-item>
           <!-- card conten two  -->
-          <v-card class="ma-2" elevation="4"> ol </v-card>
+          <v-card class="ma-2" elevation="4">
+            <FormCEO :mValue="ceoDialog" @onLoadformcompany="initail" />
+          </v-card>
         </v-tab-item>
       </v-tabs>
       <!-- end tabs menu -->
@@ -93,7 +99,12 @@
       @onRenew="onRenewCompany"
     />
     <!-- area code ceo   -->
-    <Addceo :dialogform="ceoDialog" @onClose="ceoDialog = !ceoDialog" />
+    <Addceo
+      :dialogform="ceoDialog"
+      :company_Id="company_Id"
+      @onClose="ceoDialog = !ceoDialog"
+      @onSubmit="onCreateCEO"
+    />
 
     <!-- area loader -->
     <loader :overlay="mLoader" />
@@ -101,18 +112,22 @@
 </template>
 <script>
 import AccountService from "../../service/AccountService";
+import CEOService from "../../service/CeoService";
 import Add from "./companyCreate.vue";
 import Edit from "./compnayEdit.vue";
 import Renew from "./companyRenew.vue";
 import AddCEO from "../CEO/createCEO.vue";
 import MSG from "../../components/notification/messageRight";
-// const keyIP = process.env.VUE_APP_IP;
+
+//from ceo
+import formCEO from "../CEO/index.vue";
 export default {
   components: {
     Addform: Add,
     Editform: Edit,
     RenewForm: Renew,
     Addceo: AddCEO,
+    FormCEO: formCEO,
   },
   data() {
     return {
@@ -126,6 +141,7 @@ export default {
       mObject: null,
       rDialog: false,
       ceoDialog: false,
+      company_Id: 0,
       mPath: process.env.VUE_APP_PATH,
       mLoader: false,
     };
@@ -144,20 +160,35 @@ export default {
           size: 20,
         },
       }).then((result) => {
-        this.mItem = result.data.rs.data;
         this.nCount = result.data.counts;
-
-        // console.log(this.mItem);
+        const array = result.data.rs.data;
+        for (let index = 0; index < array.length; index++) {
+          array[index].ex = this.checkDate(
+            new Date(array[index].cpn_fromDate.split("T")[0]),
+            new Date(array[index].cpn_endDate.split("T")[0])
+          );
+        }
+        this.mItem = array.map((data, index) => ({
+          ...data,
+          No: index + 1,
+        }));
+        // console.log(array);
       });
       this.load = false;
     },
-
+    checkDate(startDate, endDate) {
+      return (
+        endDate.getMonth() -
+        startDate.getMonth() +
+        12 * (endDate.getFullYear() - startDate.getFullYear())
+      );
+    },
     // insert company data
     async onSaveCompany(item) {
       await AccountService.create(item).then((result) => {
         this.aDialog = false;
         this.initail();
-        MSG.showMessage("success", result.data.msg, 3000);
+        MSG.showMessage("success", result.data, 3000);
         // console.log(result.data.msg);
       });
     },
@@ -167,7 +198,7 @@ export default {
       await AccountService.update(item).then((result) => {
         this.eDialog = false;
         this.initail();
-        MSG.showMessage("success", result.data.msg, 3000);
+        MSG.showMessage("success", result.data, 3000);
       });
     },
 
@@ -176,7 +207,7 @@ export default {
       await AccountService.renew(item).then((result) => {
         this.rDialog = false;
         this.initail();
-        MSG.showMessage("success", result.data.msg, 3000);
+        MSG.showMessage("success", result.data, 3000);
       });
     },
     async onChengeImage(item) {
@@ -189,13 +220,10 @@ export default {
         hesders: { "content-type": "multipart/form-data" },
       };
 
-      await AccountService.changeIMG(item.Id, formdata, config).then(
-        (result) => {
-          this.initail();
-          this.mLoader = false;
-          MSG.showMessage("success", result.data.msg, 3000);
-        }
-      );
+      await AccountService.changeIMG(item.Id, formdata, config).then(() => {
+        this.initail();
+        this.mLoader = false;
+      });
     },
 
     // swith state
@@ -209,7 +237,7 @@ export default {
       await AccountService.swithState(item.cpn_Id, { state: state }).then(
         (result) => {
           this.initail();
-          MSG.showMessage("success", result.data.msg, 3000);
+          MSG.showMessage("success", result.data, 3000);
         }
       );
     },
@@ -233,9 +261,17 @@ export default {
     },
 
     // click Add CEO
-    onCEO(item) {
+    async onCEO(item) {
+      this.company_Id = item.cpn_Id;
       this.ceoDialog = true;
-      console.log(item);
+    },
+    //create CEO
+    async onCreateCEO(item) {
+      await CEOService.createCEO(item).then((result) => {
+        this.ceoDialog = false;
+        this.initail();
+        MSG.showMessage("success", result.data, 3000);
+      });
     },
     //click Delete
     async onDelete(item) {
@@ -245,9 +281,9 @@ export default {
         this.$t("Alert.yes")
       ).then((result) => {
         if (result) {
-          AccountService.delete(item.cpn_Id).then(() => {
+          AccountService.delete(item.cpn_Id).then((result) => {
             this.initail();
-            MSG.showMessage("success", this.$t("Alert.messageDel"), 3000);
+            MSG.showMessage("success", result.data, 3000);
           });
         }
       });
@@ -257,28 +293,28 @@ export default {
     HeaderColumn() {
       return [
         {
-          text: this.$t("table.tbcompany.NO"),
+          text: this.$t("table.NO"),
           align: "start",
           sortable: false,
-          value: "cpn_Id",
+          value: "No",
         },
-        { text: this.$t("table.tbcompany.company_name"), value: "cpn_name" },
+        { text: this.$t("table.company_name"), value: "cpn_name" },
         {
           text: this.$t("table.logo"),
           value: "cpn_logo",
         },
         {
-          text: this.$t("table.tbcompany.serialCompany"),
+          text: this.$t("table.serial_Company"),
           value: "cpn_serialNumber",
         },
-        { text: this.$t("table.tbcompany.phoneNumber"), value: "cpn_phone" },
-        { text: this.$t("table.tbcompany.tell"), value: "cpn_tell" },
-        { text: this.$t("table.tbcompany.content"), value: "cpn_content" },
-        { text: this.$t("table.tbcompany.fromDate"), value: "cpn_fromDate" },
-        { text: this.$t("table.tbcompany.endDate"), value: "cpn_endDate" },
-        { text: this.$t("table.tbcompany.status"), value: "cpn_state" },
-        { text: this.$t("table.tbcompany.createdAt"), value: "createdAt" },
-        { text: this.$t("table.tbcompany.updatedAt"), value: "updatedAt" },
+        { text: this.$t("table.phone_Number"), value: "cpn_phone" },
+        { text: this.$t("table.tell"), value: "cpn_tell" },
+        { text: this.$t("table.content"), value: "cpn_content" },
+        { text: this.$t("table.fromDate"), value: "cpn_fromDate" },
+        { text: this.$t("table.endDate"), value: "cpn_endDate" },
+        { text: this.$t("table.status"), value: "cpn_state" },
+        { text: this.$t("table.createdAt"), value: "createdAt" },
+        { text: this.$t("table.updatedAt"), value: "updatedAt" },
         { text: this.$t("table.active"), sortable: false, value: "active" },
       ];
     },

@@ -22,7 +22,7 @@
                 <v-row no-gutters>
                   <v-col cols="12" sm="6" md="6" class="pr-2">
                     <v-text-field
-                      :label="this.$t('textfield.company.name')"
+                      :label="this.$t('textfield.company_name')"
                       v-model="mData.cpn_name"
                       prepend-inner-icon="mdi-home-city"
                       solo
@@ -31,7 +31,7 @@
                       :rules="[mValid.require]"
                     ></v-text-field>
                     <v-text-field
-                      :label="this.$t('textfield.company.serialCompany')"
+                      :label="this.$t('textfield.serial_Company')"
                       v-model="mData.cpn_serialNumber"
                       prepend-inner-icon="mdi-script-text-key"
                       solo
@@ -39,30 +39,16 @@
                       clearable
                       :rules="[mValid.require]"
                     ></v-text-field>
+                    <fieldphoner @onPhone="onPhoneNumber" />
+
                     <v-text-field
-                      :label="this.$t('textfield.company.phone')"
-                      v-model="mData.cpn_phone"
-                      prepend-inner-icon="mdi-phone"
-                      solo
-                      required
-                      clearable
-                      :counter="13"
-                      :rules="[
-                        mValid.require,
-                        mValid.phone,
-                        mValid.number,
-                        mValid.space,
-                        mValid.specialCharactor,
-                      ]"
-                    ></v-text-field>
-                    <v-text-field
-                      :label="this.$t('textfield.company.Tell')"
+                      :label="this.$t('textfield.tell')"
                       v-model="mData.cpn_tell"
                       prepend-inner-icon="mdi-phone-classic"
                       solo
                       required
                       clearable
-                      :counter="7"
+                      :counter="9"
                       :rules="[
                         mValid.require,
                         mValid.tell,
@@ -93,7 +79,7 @@
                             <span><v-icon>mdi-calendar</v-icon></span>
                           </template>
                           <template slot="label">
-                            <span>{{ $t("textfield.company.fromDate") }}</span>
+                            <span>{{ $t("textfield.fromDate") }}</span>
                           </template>
                         </v-text-field>
                       </template>
@@ -141,7 +127,7 @@
                             <span><v-icon>mdi-calendar</v-icon></span>
                           </template>
                           <template slot="label">
-                            <span>{{ $t("textfield.company.endDate") }}</span>
+                            <span>{{ $t("textfield.endDate") }}</span>
                           </template>
                         </v-text-field>
                       </template>
@@ -166,7 +152,7 @@
                       rows="20"
                       row-height="60"
                       append-icon="mdi-comment"
-                      :label="this.$t('textfield.company.content')"
+                      :label="this.$t('textfield.content')"
                       :rules="[mValid.require]"
                     >
                     </v-textarea>
@@ -224,6 +210,9 @@ export default {
   methods: {
     onClose() {
       this.$emit("onClose");
+    },
+    onPhoneNumber(phone) {
+      this.mData.cpn_phone = phone;
     },
     onEdit() {
       if (this.$refs.form.validate()) {

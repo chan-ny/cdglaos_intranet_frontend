@@ -52,6 +52,7 @@ th {
   font-size: 12px !important;
 }
 td {
+  margin: -10px !important;
   font-size: 13px !important;
 }
 .elementText {
@@ -73,11 +74,33 @@ td {
   background: rgb(0 0 0 / 5%) !important;
 }
 .swal2-title {
-  font-size: 1em !important;
+  font-size: 1.3em !important;
+}
+.swalAlarm {
+  font-size: 0.7em !important;
 }
 .swal2-popup {
   font-family: "Noto Sans Lao", sans-serif !important;
 }
 .swal2-header {
   padding: 0em !important;
+}
+.input-tel__input{
+  font-family: "Noto Sans Lao", sans-serif !important;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1) !important;
+  border: 0.1 solid  !important;
+
+}
+.country-selector__label{
+  font-family: "Noto Sans Lao", sans-serif !important;
+}
+.country-selector__input{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1) !important;
+  border: 0.1 solid  !important;
+}
+.v-list-item__title {
+  font-family: "Noto Sans Lao", sans-serif !important;
+}
+.v-list-item__content {
+  padding: 1px 0 !important;
 }

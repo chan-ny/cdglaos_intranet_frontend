@@ -12,7 +12,14 @@
           <v-icon v-else> mdi-dots-horizontal</v-icon>
         </v-btn>
       </template>
-      <v-btn fab dark small color="purple darken-1" @click="onCEO">
+      <v-btn
+        v-if="mCEO.CEO == null"
+        fab
+        dark
+        small
+        color="purple darken-1"
+        @click="onCEO"
+      >
         <v-icon>mdi-account-plus</v-icon>
       </v-btn>
       <v-btn fab dark small color="green" @click="onSync">
@@ -21,7 +28,14 @@
       <v-btn fab dark small color="orange" @click="onEdit">
         <v-icon>mdi-file-document-edit</v-icon>
       </v-btn>
-      <v-btn fab dark small color="red" @click="onDelete">
+      <v-btn
+        v-if="mCEO.CEO == null"
+        fab
+        dark
+        small
+        color="red"
+        @click="onDelete"
+      >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -29,6 +43,9 @@
 </template>
 <script>
 export default {
+  props: {
+    mCEO: Object,
+  },
   data() {
     return {
       direction: "left",

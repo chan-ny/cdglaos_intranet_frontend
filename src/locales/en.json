@@ -1,11 +1,23 @@
 {
   "message": "ສະບາຍດີ i18n !!",
+  "manager": {
+    "CEO": "CEO Management",
+    "Province": "Province Menagement",
+    "District": "District Menagement",
+    "Gender": "Gender Menagement"
+  },
   "title": {
     "titleCompany": "Account Management",
-    "titleAddcompany": "Add company",
-    "titleEditcompany": "Edit company",
+    "titleAddcompany": "company Add",
+    "titleEditcompany": "company Edit",
     "titleRenewCompany": "Conpany Renew permission",
+    "titleCEO": "CEO Add",
     "company": "Company Data",
+    "titleProvinceAdd": "Province Add",
+    "titleProvinceEdit": "Province Edit",
+    "titleDistrictAdd": "Disstrict Add",
+    "titleDistrictEdit": "District Edit",
+    "District": "District Data",
     "CEO": "Chief Executive offical"
   },
   "text": {
@@ -41,32 +53,49 @@
     "active": "Activity",
     "logo": "Logo",
     "E/D": "Enable/Disable",
-    "tbcompany": {
-      "NO": "NO",
-      "company_name": "Company Name",
-      "serialCompany": "Serial of Company",
-      "phoneNumber": "Phone Number",
-      "tell": "Tell",
-      "content": "Content...",
-      "fromDate": "Start from of Date",
-      "endDate": "End Date",
-      "status": "State",
-      "createdAt": "Date",
-      "updatedAt": "Up"
-    }
+    "NO": "NO",
+    "company_name": "Company Name",
+    "serial_Company": "Serial of Company",
+    "phone_Number": "Phone Number",
+    "tell": "Tell",
+    "content": "Content...",
+    "fromDate": "Start from of Date",
+    "endDate": "End Date",
+    "status": "State",
+    "createdAt": "Date",
+    "updatedAt": "Up",
+    "email": "Email",
+    "firstname": "Firstname",
+    "role_name": "Type User",
+    "pv_english": "province english",
+    "pv_lao": "province laos",
+    "district_Number":"District Number",
+    "dt_english": "District English Name",
+    "dt_laos": "District Laos Name",
+    "province": "Province"
+
   },
   "textfield": {
+    "country": "Country",
+    "first_Name": "First Name",
     "NO": "Code",
-    "company": {
-      "name": "Company Name",
-      "serialCompany": "Company No",
-      "phone": "Phone Number",
-      "Tell": "Tell",
-      "content": "Content",
-      "fromDate": "From Date",
-      "endDate": "End Date",
-      "state": "State"
-    }
+    "company_name": "Company Name",
+    "serial_Company": "Company No",
+    "phone": "Phone Number",
+    "tell": "Tell",
+    "content": "Content",
+    "fromDate": "From Date",
+    "endDate": "End Date",
+    "status": "Status",
+    "email": "Email",
+    "province_en": "Province is English name",
+    "province_la": "Province is Laos name",
+    "district_en": "District English Name",
+    "district_la": "District Laos Name",
+    "province_choose":"Province Choose"
+
+
+
   },
   "validation": {
     "require": "please Required",
@@ -74,7 +103,12 @@
     "space": "should not space",
     "number": "it must be Numeric",
     "charactor": "it must be Charactor",
-    "specialcharactor": " Dot not have special the charactor"
+    "specialcharactor": " Dot not have special the charactor",
+    "email": "Email",
+    "password": "Password",
+    "english": "it must be English Charactor",
+    "laos": "it must be laos Charactor"
+    
   },
   "Alert": {
     "question": "Are you sure ? to do process ",

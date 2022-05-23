@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import i18n from "../../i18n";
 
 function showMessage(even, text, timeout) {
   const Toast = Swal.mixin({
@@ -13,10 +14,23 @@ function showMessage(even, text, timeout) {
     },
   });
 
-  Toast.fire({
-    icon: even,
-    title: '<div style=" font-weight: normal;">' + text + "</div>",
-  });
+  if (i18n.locale == "en") {
+    Toast.fire({
+      icon: even,
+      title:
+        '<div style=" font-weight: normal;" class="swalAlarm">' +
+        text.msgen +
+        "</div>",
+    });
+  } else {
+    Toast.fire({
+      icon: even,
+      title:
+        '<div style=" font-weight: normal;" class="swalAlarm">' +
+        text.msgla +
+        "</div>",
+    });
+  }
 }
 
 function Success(title, content) {

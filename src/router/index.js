@@ -31,6 +31,21 @@ const routes = [
     name: "Account",
     component: () => import("../pages/Acoount/index.vue"),
   },
+  {
+    path: "/province",
+    name: "Province",
+    component: () => import("../pages/Province/index.vue"),
+  },
+  {
+    path: "/district",
+    name: "District",
+    component: () => import("../pages/District/index.vue"),
+  },
+  {
+    path: "/gender",
+    name: "Gender",
+    component: () => import("../pages/Gender/index.vue"),
+  },
 ];
 
 const router = new VueRouter({

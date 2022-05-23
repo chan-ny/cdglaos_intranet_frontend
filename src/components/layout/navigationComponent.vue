@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       items: null,
-      mini: false,
+      mini: true,
       state: "",
     };
   },

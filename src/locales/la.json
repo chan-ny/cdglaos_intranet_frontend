@@ -1,10 +1,23 @@
 {
   "message": "ສະບາຍດີ i18n !!",
+  "manager": {
+    "CEO": "ຈັດການຂໍ້ມູນຜູ້ບໍລິຫານ",
+    "Province": "ຈັດການຂໍ້ມູນແຂວງ",
+    "District": "ຈັດການຂໍ້ມູນເມືອງ",
+    "Gender": "ຈັດການຂໍ້ມູນເພດ"
+  },
   "title": {
     "titleCompany": "ຈັດການຂໍ້ມູນບັນຊີ",
     "titleAddcompany": "ເພີ່ມຂໍ້ມູນບໍລິສັດ",
     "titleEditcompany": "ແກ້ໄຂຂໍ້ມູນບໍລິສັດ",
     "titleRenewCompany": "ຕໍ່ສັນຍາໃຫ້ກັບບໍລິສັດ",
+    "titleCEO": "ເພີ່ມຜູ້ບໍລິຫານ",
+    "titleEditCEO": "ແກ້ໄຂຜູ້ບໍລິຫານ",
+    "titleProvinceAdd": "ເພີ່ມຂໍ້ມູນແຂວງ",
+    "titleProvinceEdit": "ແກ້ໄຂຂໍ້ມູນແຂວງ",
+    "titleDistrictAdd": "ເພີ່ມຂໍ້ມູນເມືອງ",
+    "titleDistrictEdit": "ແກ້ໄຂຂໍ້ມູນເມືອງ",
+    "District": "ຂໍ້ມູນເມືອງ",
     "company": "ຂໍ້ມູນບໍລິສັດ",
     "CEO": "ຜູ້ບໍລິຫານ"
   },
@@ -40,32 +53,47 @@
     "active": "ເລືອກ",
     "logo": "ໂລໂກ",
     "E/D": "ເປີດ/ປີດການໃຊ້",
-    "tbcompany": {
-      "NO": "ລ/ດ",
-      "company_name": "ຊື່ບໍລິສັດ",
-      "serialCompany": "ເລກທະບຽນ",
-      "phoneNumber": "ເບິໂທ",
-      "tell": "ເບີໂທສຳຮອງ",
-      "content": "ລາຍລະອຽດ",
-      "fromDate": "ວັນເວລາເລີ່ມຕົ້ນ",
-      "endDate": "ວັນທີເວລາສີ່ນສຸດ",
-      "status": "ສະຖານະ",
-      "createdAt": "ວັນທີ່",
-      "updatedAt": "ອັບເລດ"
-    }
+    "NO": "ລ/ດ",
+    "company_name": "ຊື່ບໍລິສັດ",
+    "serial_Company": "ເລກທະບຽນ",
+    "phone_Number": "ເບິໂທ",
+    "tell": "ເບີໂທສຳຮອງ",
+    "content": "ລາຍລະອຽດ",
+    "fromDate": "ວັນເວລາເລີ່ມຕົ້ນ",
+    "endDate": "ວັນທີເວລາສີ່ນສຸດ",
+    "status": "ສະຖານະ",
+    "createdAt": "ວັນທີ່",
+    "updatedAt": "ອັບເລດ",
+    "firstname": "ຊື້ ແລະ ນາມສະກຸນ",
+    "role_name": "ຜູ້ໃຊ້",
+    "email": "ອີເມວ",
+    "pv_english": "ແຂວງ ພາສາອັງກີດ",
+    "pv_lao": "ແຂວງ ພາສາລາວ",
+    "district_Number":"ຈຳນວນເມືອງ", 
+    "dt_english": "ເມືອງ ພາສາອັງກີດ",
+    "dt_laos": "ເມືອງ ພາສາລາວ",
+    "province": "ແຂວງ"
+    
   },
   "textfield": {
+    "country": "ປະເທດ",
+    "first_Name": "ຊື້ແທ້",
     "NO": "ລະຫັດ",
-    "company": {
-      "name": "ຊື່ບໍລິສັດ",
-      "serialCompany": "ທະບຽນບໍລິສັດ",
-      "phone": "ເບີໂທລະສັບ",
-      "Tell": "ເບີໂທສຳຮອງ",
-      "content": "ລາຍລະອຽດ",
-      "fromDate": "ລົງທະບຽນວັນທີ",
-      "endDate": "ຫມົດອາຍຸ",
-      "state": "ສະຖານະ"
-    }
+    "email": "ອີເມວ",
+    "password": "ລະຫັດຜ່ານ",
+    "company_name": "ຊື່ບໍລິສັດ",
+    "serial_Company": "ທະບຽນບໍລິສັດ",
+    "phone": "ເບີໂທລະສັບ",
+    "tell": "ເບີໂທສຳຮອງ",
+    "content": "ລາຍລະອຽດ",
+    "fromDate": "ລົງທະບຽນວັນທີ",
+    "endDate": "ຫມົດອາຍຸ",
+    "status": "ສະຖານະ",
+    "province_en": "ແຂວງ ເປັນພາສາອັງກີດ",
+    "province_la": "ແຂວງ ເປັນພາສາລາວ",
+    "district_en": "ເມືອງ ພາສາອັງກີດ",
+    "district_la": "ເມືອງ ພາສາລາວ",
+    "province_choose":"ເລືອກແຂວງ"
   },
   "validation": {
     "require": "ປ້ອນຂໍ້ມູນເສຍກ່ອນ",
@@ -73,7 +101,11 @@
     "space": "ບໍ່ຄວນທີ່ຈະມີຍະວ່າງ",
     "number": "ຕ້ອງເປັນຕົວເລກ",
     "charactor": "ຕ້ອງເປັນຕົວໜັງສື່",
-    "specialcharactor": "ຕ້ອງບໍ່ແມ່ນອັກສອນພີເສດ"
+    "specialcharactor": "ຕ້ອງບໍ່ແມ່ນອັກສອນພີເສດ",
+    "email": "ອີເມວ",
+    "password": "ລະຫັດຜ່ານ",
+    "english": "ຕ້ອງເປັນພາສາອັງກີດ",
+    "laos": "ຕ້ອງເປັນພາສາລາວ"
   },
   "Alert": {
     "question": "ທ່ານໝັ້ນໃຈແລ້ວບໍ? ທີ່ຈະດຳເນີນການ",

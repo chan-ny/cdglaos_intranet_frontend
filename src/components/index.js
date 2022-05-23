@@ -14,6 +14,11 @@ import formatDate from "./btnTable/datetime.vue";
 import Loader from "./progress/loader.vue";
 import SwithSatet from "./btnTable/swithState.vue";
 import TextShort from "./btnTable/textShort.vue";
+import PhoneNumber from "./textField/phoneNumber.vue";
+import DateimeExpried from "./btnTable/datetimeExpired.vue";
+import Delete from "./btnTable/delete.vue";
+import Update from "./btnTable/update.vue";
+import View from "./btnTable/view.vue";
 
 function RednderComponent(App) {
   App.component("Navigation-Drawer", Navigation);
@@ -32,6 +37,11 @@ function RednderComponent(App) {
   App.component("loader", Loader);
   App.component("swithstate", SwithSatet);
   App.component("textshort", TextShort);
+  App.component("fieldphoner", PhoneNumber);
+  App.component("datetimeexpried", DateimeExpried);
+  App.component("btndelete", Delete);
+  App.component("btnupdate", Update);
+  App.component("btnview", View);
 }
 
 export { RednderComponent };

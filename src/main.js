@@ -6,6 +6,12 @@ import vuetify from "./plugins/vuetify";
 import { RednderComponent } from "./components/index";
 import i18n from "./i18n";
 
+// vue phone number
+import VuePhoneNumberInput from "vue-phone-number-input";
+import "vue-phone-number-input/dist/vue-phone-number-input.css";
+
+Vue.component("vue-phone-number-input", VuePhoneNumberInput);
+
 RednderComponent(Vue);
 Vue.config.productionTip = false;
 

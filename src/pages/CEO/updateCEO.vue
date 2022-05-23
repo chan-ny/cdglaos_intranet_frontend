@@ -10,7 +10,7 @@
       <v-card>
         <v-card-title>
           <span class="headline"
-            ><div class="font20b">{{ $t("title.titleCEO") }}</div></span
+            ><div class="font20b">{{ $t("title.titleEditCEO") }}</div></span
           >
         </v-card-title>
         <v-divider></v-divider>
@@ -28,7 +28,7 @@
                     clearable
                     :rules="[mValid.require]"
                   ></v-text-field>
-                  <fieldphoner :mClear="dialogform" @onPhone="onPhoneNumber" />
+                  <fieldphoner @onPhone="onPhoneNumber" />
                   <v-text-field
                     :label="this.$t('textfield.tell')"
                     v-model="mData.ceo_tell"
@@ -62,6 +62,7 @@
                     :append-icon="mShowpassword ? 'mdi-eye' : 'mdi-eye-off'"
                     @click:append="mShowpassword = !mShowpassword"
                     :counter="8"
+                    :rules="[mValid.require, mValid.space]"
                   >
                     <template slot="prepend-inner">
                       <v-icon size="25">mdi-lock</v-icon>
@@ -78,7 +79,7 @@
             <btnCancel @onCancel="onClose" />
           </div>
           <div>
-            <btnSubmit @onSubmit="onSubmit" />
+            <btnEdit @onEdit="onEdit" />
           </div>
         </v-card-actions>
       </v-card>
@@ -87,22 +88,20 @@
 </template>
 <script>
 import valid from "../../helper/rulesField.js";
-import MSG from "../../components/notification/messageRight";
 export default {
   props: {
     dialogform: Boolean,
-    company_Id: Number,
+    mValue: Object,
   },
   data() {
     return {
       loading: false,
       mShowpassword: false,
       mData: {
+        ceo_Id: "",
         ceo_name: "",
-        company_Id: 0,
         ceo_phone: "",
         ceo_tell: "",
-        role_Id: 2,
         uemail: "",
         upassowrd: "",
         ustatus: "active",
@@ -117,19 +116,10 @@ export default {
     onPhoneNumber(phone) {
       this.mData.ceo_phone = phone;
     },
-    async onSubmit() {
-      if (this.mData.ceo_phone == "") {
-        const msg = {
-          msgen: this.$t("validation.phone"),
-          msgla: this.$t("validation.phone"),
-        };
-        MSG.showMessage("error", msg, 3000);
-        return;
-      }
+    async onEdit() {
       if (this.$refs.form.validate()) {
-        this.mData.company_Id = await this.company_Id;
         this.loading = true;
-        this.$emit("onSubmit", this.mData);
+        this.$emit("onEdit", this.mData);
       }
     },
   },
@@ -144,13 +134,20 @@ export default {
     dialogform() {
       if (this.dialogform == false) {
         this.loading = false;
-        this.mData.ceo_Id = null;
-        this.mData.ceo_name = null;
-        this.mData.ceo_phone = null;
-        this.mData.ceo_tell = null;
-        this.mData.uemail = null;
-        this.mData.upassowrd = null;
+        this.mData.ceo_Id = "";
+        this.mData.ceo_name = "";
+        this.mData.ceo_phone = "";
+        this.mData.ceo_tell = "";
+        this.mData.uemail = "";
+        this.mData.upassowrd = "";
       }
+    },
+    mValue() {
+      this.mData.ceo_Id = this.mValue.ceo_Id;
+      this.mData.ceo_name = this.mValue.ceo_name;
+      this.mData.ceo_phone = this.mValue.ceo_phone;
+      this.mData.ceo_tell = this.mValue.ceo_tell;
+      this.mData.uemail = this.mValue.uemail;
     },
   },
 };

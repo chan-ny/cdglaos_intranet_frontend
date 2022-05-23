@@ -1,8 +1,11 @@
 <template>
   <div>
-    <v-container class="px-0" fluid>
-      <v-switch color="red" v-model="state" @change="onChange"></v-switch>
-    </v-container>
+    <v-switch
+      class="ma-n2"
+      color="red"
+      v-model="state"
+      @change="onChange"
+    ></v-switch>
   </div>
 </template>
 <script>
