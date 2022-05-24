@@ -17,6 +17,7 @@
     "titleProvinceEdit": "ແກ້ໄຂຂໍ້ມູນແຂວງ",
     "titleDistrictAdd": "ເພີ່ມຂໍ້ມູນເມືອງ",
     "titleDistrictEdit": "ແກ້ໄຂຂໍ້ມູນເມືອງ",
+    "titleGenderAdd": "ເພີ່ມຂໍ້ມູນເພດ",
     "District": "ຂໍ້ມູນເມືອງ",
     "company": "ຂໍ້ມູນບໍລິສັດ",
     "CEO": "ຜູ້ບໍລິຫານ"
@@ -69,11 +70,10 @@
     "email": "ອີເມວ",
     "pv_english": "ແຂວງ ພາສາອັງກີດ",
     "pv_lao": "ແຂວງ ພາສາລາວ",
-    "district_Number":"ຈຳນວນເມືອງ", 
+    "district_Number": "ຈຳນວນເມືອງ",
     "dt_english": "ເມືອງ ພາສາອັງກີດ",
     "dt_laos": "ເມືອງ ພາສາລາວ",
     "province": "ແຂວງ"
-    
   },
   "textfield": {
     "country": "ປະເທດ",
@@ -93,7 +93,9 @@
     "province_la": "ແຂວງ ເປັນພາສາລາວ",
     "district_en": "ເມືອງ ພາສາອັງກີດ",
     "district_la": "ເມືອງ ພາສາລາວ",
-    "province_choose":"ເລືອກແຂວງ"
+    "province_choose": "ເລືອກແຂວງ",
+    "gender_en": "ເພດ ເປັນພາສາອັງກີດ",
+    "gender_la": "ເພດ ເປັນພາສາລາວ"
   },
   "validation": {
     "require": "ປ້ອນຂໍ້ມູນເສຍກ່ອນ",

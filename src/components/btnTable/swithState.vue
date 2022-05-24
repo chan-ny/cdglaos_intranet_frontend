@@ -11,23 +11,27 @@
 <script>
 export default {
   props: {
-    mObject: Object,
+    mStatus: String,
+    mId: Number,
   },
   data() {
     return {
       state: null,
+      status: null,
     };
   },
   created() {
-    if (this.mObject.cpn_state == "active") {
+    if (this.mStatus == "active") {
       this.state = true;
+      this.status = "inactive";
     } else {
       this.state = false;
+      this.status = "active";
     }
   },
   methods: {
     onChange() {
-      this.$emit("onSwith", this.mObject);
+      this.$emit("onSwith", { Id: this.mId, status: this.status });
     },
   },
 };

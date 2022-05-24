@@ -37,9 +37,9 @@
         <div>
           <v-btn large block>
             <v-icon>mdi-logout</v-icon>
-            <div class="font16r" v-if="mini == false" @click="onLogout">
+            <span class="font16r" v-if="mini == false" @click="onLogout">
               {{ $t("text.logout") }}
-            </div>
+            </span>
           </v-btn>
         </div>
       </template>

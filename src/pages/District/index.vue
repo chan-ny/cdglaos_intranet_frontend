@@ -60,6 +60,7 @@ import FormAdd from "./DistrictCreate.vue";
 import FormEdit from "./districtUpdate.vue";
 import i18n from "../../i18n";
 import MSG from "../../components/notification/messageRight";
+import GenderService from "../../service/GenderService";
 
 export default {
   components: {
@@ -133,7 +134,7 @@ export default {
         this.$t("Alert.yes")
       ).then((result) => {
         if (result) {
-          DistrictService.delete(item.dt_Id)
+          GenderService.delete(item.gd_Id)
             .then((result) => {
               this.initially();
               MSG.showMessage("success", result.data, 3000);

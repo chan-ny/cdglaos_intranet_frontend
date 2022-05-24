@@ -17,6 +17,7 @@
     "titleProvinceEdit": "Province Edit",
     "titleDistrictAdd": "Disstrict Add",
     "titleDistrictEdit": "District Edit",
+    "titleGenderAdd": "Gender Add",
     "District": "District Data",
     "CEO": "Chief Executive offical"
   },
@@ -69,11 +70,10 @@
     "role_name": "Type User",
     "pv_english": "province english",
     "pv_lao": "province laos",
-    "district_Number":"District Number",
+    "district_Number": "District Number",
     "dt_english": "District English Name",
     "dt_laos": "District Laos Name",
     "province": "Province"
-
   },
   "textfield": {
     "country": "Country",
@@ -92,10 +92,9 @@
     "province_la": "Province is Laos name",
     "district_en": "District English Name",
     "district_la": "District Laos Name",
-    "province_choose":"Province Choose"
-
-
-
+    "province_choose": "Province Choose",
+    "gender_en": "Gender is english language",
+    "gender_la": "Gender is laos language"
   },
   "validation": {
     "require": "please Required",
@@ -108,7 +107,6 @@
     "password": "Password",
     "english": "it must be English Charactor",
     "laos": "it must be laos Charactor"
-    
   },
   "Alert": {
     "question": "Are you sure ? to do process ",

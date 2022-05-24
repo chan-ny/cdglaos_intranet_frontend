@@ -35,7 +35,11 @@
                 />
               </template>
               <template v-slot:[`item.cpn_state`]="{ item }">
-                <swithstate :mObject="item" @onSwith="onSwith" />
+                <swithstate
+                  :mStatus="item.cpn_state"
+                  :mId="item.cpn_Id"
+                  @onSwith="onSwith"
+                />
               </template>
               <template v-slot:[`item.cpn_content`]="{ item }">
                 <textshort :mObject="item" />
@@ -228,18 +232,16 @@ export default {
 
     // swith state
     async onSwith(item) {
-      let state = "";
-      if (item.cpn_state == "active") {
-        state = "inactive";
-      } else {
-        state = "active";
-      }
-      await AccountService.swithState(item.cpn_Id, { state: state }).then(
-        (result) => {
+      await AccountService.swithState(item.Id, item)
+        .then((result) => {
           this.initail();
           MSG.showMessage("success", result.data, 3000);
-        }
-      );
+        })
+        .catch((error) => {
+          let err = { ...error.response.data };
+          MSG.showMessage("error", err, 3000);
+          // console.clear();
+        });
     },
     // render pagination
     onPages(page) {
